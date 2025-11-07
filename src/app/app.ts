@@ -12,6 +12,6 @@ import { CommonModule } from '@angular/common';
 export class App {
   public details$;
   constructor(private store: Store<{ data: number }>) {
-    this.details$ = this.store.select((state) => state.data);
+    this.details$ = this.store.selectSignal((state) => state.data);
   }
 }
