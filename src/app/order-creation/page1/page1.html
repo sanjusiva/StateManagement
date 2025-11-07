@@ -1,5 +1,12 @@
 
+<h1>
+    Page 1 details from store
+</h1>
+{{details | json}}
 
-<button id="setObjectButton" (click)="setHardcodedObject()">Click Me</button>
+<br><br>
 
-{{details$ | async | json}}
+<button id="setObjectButton" (click)="setHardcodedObject()">Continue</button><br><br>
+
+<button id="setObjectButton" (click)="resetDetailsValue()">Cancel</button>
+

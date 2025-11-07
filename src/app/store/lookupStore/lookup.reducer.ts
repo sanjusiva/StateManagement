@@ -5,9 +5,8 @@ export const initialState = {};
 
 export const detailsReducer = createReducer(
   initialState,
-  on(DetailsActions.setDetailsLookup, (state,data) => {
-    console.log("state: ",state,data);
-    
-    return data }),
+  on(DetailsActions.setDetailsLookup, (state, data) => {
+    return data;
+  }),
   on(DetailsActions.resetDetailsLookup, () => ({}))
 );

@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as DetailsActions from '../../store/lookupStore/lookup.action';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { take } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-page1',
+  selector: 'app-page3',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './page1.html',
-  styleUrl: './page1.css',
+  templateUrl: './page3.html',
+  styleUrl: './page3.css',
 })
-export class Page1 {
+export class Page3 {
   public details: any;
   constructor(private store: Store<{ data: any }>, public router: Router) {}
   ngOnInit() {
@@ -23,20 +23,30 @@ export class Page1 {
         this.details = data;
       });
   }
+
   setHardcodedObject(): void {
     const hardcodedObject = {
       ...this.details,
-      customer:{},
-      weight:{},
-      tariff:{},
-      shipper:{},
-      consognee:{}
-    };
+      instructions:{},
+      accessorials:{},
+      linehaul:{}
+      }
     this.store.dispatch(DetailsActions.setDetailsLookup(hardcodedObject));
-    this.router.navigate(['/page2']);
   }
 
   resetDetailsValue() {
     this.store.dispatch(DetailsActions.resetDetailsLookup());
+    this.router.navigate(['/page1']);
+  }
+
+  navigateToPrevious() {
+    const hardcodedObject = {
+      ...this.details,
+      instructions:{},
+      accessorials:{},
+      linehaul:{}
+      }
+    this.store.dispatch(DetailsActions.setDetailsLookup(hardcodedObject));
+    this.router.navigate(['/page2']);
   }
 }
