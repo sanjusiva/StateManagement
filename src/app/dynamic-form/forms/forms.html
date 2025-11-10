@@ -1,0 +1,43 @@
+<h2>Simple Dynamic Form Example</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngFor="let question of questions" class="form-field">
+    <label>{{ question.label }}</label>
+
+    <!-- Textbox -->
+    <input
+      *ngIf="question.controlType === 'textbox'"
+      [formControlName]="question.key"
+      [type]="question.type || 'text'"
+    />
+
+    <!-- Dropdown -->
+    <select
+      *ngIf="question.controlType === 'dropdown'"
+      [formControlName]="question.key"
+    >
+      <option *ngFor="let opt of question.options" [value]="opt.key">
+        {{ opt.value }}
+      </option>
+    </select>
+
+    <!-- Checkbox -->
+    <label *ngIf="question.controlType === 'checkbox'" class="checkbox">
+      <input type="checkbox" [formControlName]="question.key" />
+      {{ question.label }}
+    </label>
+
+    <!-- Error Message -->
+    <div
+      *ngIf="form.get(question.key)?.invalid && form.get(question.key)?.touched"
+      class="error"
+    >
+      {{ question.label }} is required.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!form.valid">Submit</button>
+</form>
+
+<!-- Debug -->
+<pre>{{ form.value | json }}</pre>
