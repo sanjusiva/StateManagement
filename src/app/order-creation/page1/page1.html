@@ -1,12 +1,17 @@
 
-<h1>
-    Page 1 details from store
-</h1>
-{{details | json}}
+<div class="page">
 
-<br><br>
-
-<button id="setObjectButton" (click)="setHardcodedObject()">Continue</button><br><br>
-
-<button id="setObjectButton" (click)="resetDetailsValue()">Cancel</button>
+    <h1>
+        Page 1 details from store
+    </h1>
+    {{details | json}}
+    
+    <br><br>
+    
+    <button id="setObjectButton" (click)="setHardcodedObject()">Set value</button><br><br>
+    <button id="setObjectButton" (click)="continue()">Continue</button><br><br>
+    
+    
+    <button id="setObjectButton" (click)="resetDetailsValue()">Cancel</button>
+</div>
 

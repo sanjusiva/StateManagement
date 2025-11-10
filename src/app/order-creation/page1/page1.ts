@@ -26,13 +26,16 @@ export class Page1 {
   setHardcodedObject(): void {
     const hardcodedObject = {
       ...this.details,
-      customer:{},
-      weight:{},
+      customer:{agnetId:1,agentName:'someName'},
+      weight:{actWgh:34,dimWgh:45},
       tariff:{},
       shipper:{},
       consognee:{}
     };
     this.store.dispatch(DetailsActions.setDetailsLookup(hardcodedObject));
+  }
+  
+  continue(){
     this.router.navigate(['/page2']);
   }
 
