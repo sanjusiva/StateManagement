@@ -4,6 +4,7 @@ import * as DetailsActions from '../../store/lookupStore/lookup.action';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { SignalService } from '../../service/signal.service';
 
 @Component({
   selector: 'app-page2',
@@ -14,7 +15,8 @@ import { take } from 'rxjs';
 })
 export class Page2 {
   public details: any;
-  constructor(private store: Store<{ data: any }>, public router: Router) {}
+  public signalValue: any;
+  constructor(private store: Store<{ data: any }>, public router: Router,private orderSignalService : SignalService) {}
   ngOnInit() {
     this.store
       .select((state) => state.data)
@@ -22,6 +24,7 @@ export class Page2 {
       .subscribe((data) => {
         this.details = data;
       });
+    this.signalValue = this.orderSignalService.getOrderDetails()();
   }
   setHardcodedObject(): void {
     const hardcodedObject = {
@@ -31,11 +34,13 @@ export class Page2 {
       reference: {},
     };
     this.store.dispatch(DetailsActions.setDetailsLookup(hardcodedObject));
+    this.orderSignalService.setOrderdetails(hardcodedObject);
     this.router.navigate(['/page3']);
   }
 
   resetDetailsValue() {
     this.store.dispatch(DetailsActions.resetDetailsLookup());
+    this.orderSignalService.clearOrderDetails();
     this.router.navigate(['/page1']);
   }
 
@@ -47,6 +52,7 @@ export class Page2 {
       reference: {},
     };
     this.store.dispatch(DetailsActions.setDetailsLookup(hardcodedObject));
+    this.orderSignalService.setOrderdetails(hardcodedObject);
     this.router.navigate(['/page1']);
   }
 }
